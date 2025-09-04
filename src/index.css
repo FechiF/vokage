@@ -224,6 +224,11 @@ progress {
   margin: 2rem 0 0;
   text-align: left;
 }
+
+.progress p {
+  margin: 0;
+}
+
 .level figure {
   width: 140px;
   height: 79px;

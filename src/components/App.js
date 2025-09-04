@@ -10,12 +10,10 @@ function App() {
   return (
     <div className="app">
       <Header />
-      {!user && <LoginScreen />}
-      {user && (
-        <QuizProvider>
-          <Main />
-        </QuizProvider>
-      )}
+
+      <QuizProvider>
+        <Main />
+      </QuizProvider>
     </div>
   );
 }
