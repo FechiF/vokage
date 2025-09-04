@@ -1,9 +1,7 @@
-import { useQuiz } from '../Contexts/QuizContextProvider.js';
-import { useAuth } from '../Contexts/AuthContextProvider.js';
+import { useQuiz } from '../contexts/QuizContextProvider.js';
 
 function LevelProgress() {
-  const { level } = useQuiz();
-  const { levels } = useAuth();
+  const { level, levels } = useQuiz();
 
   const NumLevels = levels.length;
 

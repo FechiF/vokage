@@ -1,4 +1,4 @@
-import { useQuiz } from '../Contexts/QuizContextProvider.js';
+import { useQuiz } from '../contexts/QuizContextProvider.js';
 function FinishScreen() {
   const { points, questions, highScore, dispatch } = useQuiz();
   const maxPossiblePoints = questions.reduce(

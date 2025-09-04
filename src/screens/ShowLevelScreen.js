@@ -1,15 +1,10 @@
 import { useEffect } from 'react';
-import LevelProgress from '../components/LevelProgress';
-import { useAuth } from '../Contexts/AuthContextProvider';
-import { useQuiz } from '../Contexts/QuizContextProvider';
+import LevelProgress from '../ui/LevelProgress';
+import { useQuiz } from '../contexts/QuizContextProvider';
 
 function StartLevelScreen() {
-  const { dispatch, status, level: gameLevel } = useQuiz();
-  const { levels, user } = useAuth();
-
-  const level = Number(gameLevel ? gameLevel : user.level);
+  const { dispatch, status, level, levels } = useQuiz();
   const { rank, name, description } = levels[level - 1];
-  console.log(level, levels.length);
 
   useEffect(
     function () {

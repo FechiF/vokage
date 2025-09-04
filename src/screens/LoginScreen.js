@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { users } from '../config';
-import { useAuth } from '../Contexts/AuthContextProvider';
+import { users } from '../utilities/config';
 
 function LoginScreen() {
-  const { dispatch } = useAuth();
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
 
@@ -16,13 +14,6 @@ function LoginScreen() {
 
     if (user) {
       console.log('Login successful!');
-
-      const storedLevel = localStorage.getItem('vokage-level');
-      const currentLevel = storedLevel ? storedLevel : 0;
-
-      localStorage.setItem('vokage-level', JSON.stringify(currentLevel));
-
-      dispatch({ type: 'loadUserLevel', payload: currentLevel });
     } else {
       console.log('Invalid credentials');
     }

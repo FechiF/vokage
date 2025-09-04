@@ -1,15 +1,13 @@
-import Loader from '../components/Loader.js';
-import { useAuth } from '../Contexts/AuthContextProvider.js';
-import { useQuiz } from '../Contexts/QuizContextProvider.js';
+import Loader from '../ui/Loader.js';
+import { useQuiz } from '../contexts/QuizContextProvider.js';
 import ShowLevelScreen from '../screens/ShowLevelScreen.js';
 
 function StartScreen() {
-  const { dispatch, level } = useQuiz();
-  const { user, levels } = useAuth();
+  const { dispatch, level, levels } = useQuiz();
 
-  if (user?.level === null) return <Loader />;
+  if (level === null) return <Loader />;
 
-  if (user?.level > 0) {
+  if (level > 0) {
     return (
       <div className="start">
         {level < levels.length && (

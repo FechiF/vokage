@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useQuiz } from '../Contexts/QuizContextProvider';
-import { NUMBER_OF_QUESTIONS_PER_LEVEL } from '../config';
+import { useQuiz } from '../contexts/QuizContextProvider';
+import { NUMBER_OF_QUESTIONS_PER_LEVEL } from '../utilities/config';
 
 function FinishButton() {
   const { dispatch, points, level } = useQuiz();

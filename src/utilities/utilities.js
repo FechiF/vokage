@@ -12,3 +12,12 @@ export function shuffle(array) {
     [...array] // Initialize accumulator as shoallow copy of given array
   );
 }
+
+export function getStoredItem(key, defaultValue = null) {
+  const storedItem = localStorage.getItem(key);
+  return storedItem ? JSON.parse(storedItem) : defaultValue;
+}
+
+export function setStoredItem(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+}

@@ -1,4 +1,4 @@
-import { useQuiz } from '../Contexts/QuizContextProvider.js';
+import { useQuiz } from '../contexts/QuizContextProvider.js';
 
 function Progress() {
   const { index, questions, points, answer } = useQuiz();

@@ -1,16 +1,17 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
-import { NUMBER_OF_QUESTIONS_PER_LEVEL } from '../config';
-import { shuffle } from '../utilities/utilities';
+import { NUMBER_OF_QUESTIONS_PER_LEVEL } from '../utilities/config';
+import { shuffle, getStoredItem } from '../utilities/utilities';
 
 const QuizContext = createContext();
 const initialState = {
-  questions: [],
   allQuestions: [],
+  questions: [],
   status: 'loading',
   index: 0,
   answer: null,
   points: 0,
   highScore: 0,
+  levels: [],
   level: 0,
 };
 
@@ -29,18 +30,15 @@ function getCurrentQuestions(level, allQuestions) {
   return shuffle(currentQuestions);
 }
 
-function getStoredLevel() {
-  const storedLevel = localStorage.getItem('vokage-level');
-  return storedLevel ? storedLevel : 0;
-}
-
 function reducer(state, action) {
   switch (action.type) {
     case 'dataReceived':
+      const storedLevel = Number(getStoredItem('vokage-level', 0));
       return {
         ...state,
-        allQuestions: action.payload,
-        level: getStoredLevel(),
+        allQuestions: action.payload.questions,
+        levels: action.payload.levels,
+        level: storedLevel,
         status: 'ready',
       };
 
@@ -120,18 +118,37 @@ function reducer(state, action) {
 
 function QuizProvider({ children }) {
   const [
-    { questions, status, index, answer, points, highScore, level },
+    { questions, status, index, answer, points, highScore, level, levels },
     dispatch,
   ] = useReducer(reducer, initialState);
 
   useEffect(function () {
-    fetch(`https://vokage-api.vercel.app/questions`)
-      .then((res) => res.json())
+    const urls = [
+      'https://vokage-api.vercel.app/levels',
+      'https://vokage-api.vercel.app/questions',
+    ];
+
+    const fetchPromises = urls.map((url) => fetch(url));
+
+    Promise.all(fetchPromises)
+      .then((responses) => {
+        return Promise.all(responses.map((response) => response.json()));
+      })
       .then((data) => {
-        dispatch({ type: 'dataReceived', payload: data });
+        const quizData = {};
+        data.forEach((set) => {
+          if (set[0].rank) {
+            quizData.levels = set;
+          }
+          if (set[0].answer) {
+            quizData.questions = set;
+          }
+        });
+        dispatch({ type: 'dataReceived', payload: quizData });
       })
       .catch((error) => {
-        throw new Error(error.message);
+        dispatch({ type: 'dataFailed' });
+        console.error('Error fetching data:', error);
       });
   }, []);
 
@@ -145,6 +162,7 @@ function QuizProvider({ children }) {
         points,
         highScore,
         level,
+        levels,
         dispatch,
       }}
     >
