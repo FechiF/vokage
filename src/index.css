@@ -34,7 +34,7 @@ body {
   overscroll-behavior-y: none;
   background-color: var(--color-dark--1);
   padding: 3.2rem;
-  width: 100vw;
+  width: 100%;
 }
 
 .app {
@@ -44,12 +44,7 @@ body {
   justify-content: center;
 }
 
-.main {
-  width: 50rem;
-}
-
 .app-header {
-  width: 66rem;
   margin-bottom: 4rem;
   display: flex;
   align-items: center;
