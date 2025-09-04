@@ -31,7 +31,10 @@ body {
   min-height: 100vh;
   color: var(--color-light);
   background-color: var(--color-darkest);
+  overscroll-behavior-y: none;
+  background-color: var(--color-dark--1);
   padding: 3.2rem;
+  line-height: 1.6;
 }
 
 .app {
