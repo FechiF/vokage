@@ -422,6 +422,7 @@ progress {
 
 .modal {
   position: fixed;
+  width: 100vw;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -492,5 +493,9 @@ footer {
 
   .options {
     gap: 1.2rem;
+  }
+
+  .modal {
+    width: auto;
   }
 }
