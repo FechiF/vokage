@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { QuizProvider } from './contexts/QuizContextProvider';
+import { DictionaryProvider } from './contexts/DictionaryContextProvider';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <QuizProvider>
-      <App />
+      <DictionaryProvider>
+        <App />
+      </DictionaryProvider>
     </QuizProvider>
   </React.StrictMode>
 );

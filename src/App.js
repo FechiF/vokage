@@ -20,30 +20,28 @@ import RestartButton from './ui/RestartButton.js';
 import Modal from './ui/Modal.js';
 import Footer from './ui/Footer.js';
 
-import { DICTIONARY_API_URL } from './utilities/config.js';
+import { useDictionary } from './contexts/DictionaryContextProvider.js';
 
 function App() {
-  const { questions, status, index, answer } = useQuiz();
   const [isDictionaryOpen, setIsDictionaryOpen] = useState(false);
-  const [definition, setDefinition] = useState(null);
+  const { questions, status, index, answer } = useQuiz();
+  const { entry, setWord } = useDictionary();
+
+  const currentWord = questions[index]?.word;
 
   function closeDictionary() {
+    setWord(null);
     setIsDictionaryOpen(false);
-    setDefinition(null);
   }
 
   useEffect(
     function () {
       if (answer && answer !== questions[index].answer) {
         setIsDictionaryOpen(true);
-        fetch(`${DICTIONARY_API_URL}${questions[index].word}`)
-          .then((res) => res.json())
-          .then((data) => {
-            setDefinition(data[0]);
-          });
+        setWord(currentWord);
       }
     },
-    [answer, index, questions]
+    [answer, index, questions, currentWord, setWord]
   );
 
   return (
@@ -71,19 +69,30 @@ function App() {
         )}
         {status === 'finished' && <FinishScreen />}
 
-        <Modal
-          isOpen={isDictionaryOpen}
-          onClose={closeDictionary}
-          title={questions[index]?.word}
-        >
-          <DictionaryEntry entry={definition} />
-
-          <button
-            className="btn btn-close-dictionary"
-            onClick={closeDictionary}
-          >
-            Close
-          </button>
+        <Modal isOpen={isDictionaryOpen} onClose={closeDictionary}>
+          {!entry ? (
+            <Loader text="Loading dictionary..." />
+          ) : (
+            <DictionaryEntry entry={entry} />
+          )}
+          <div className="btn-grp">
+            {entry?.word !== currentWord && (
+              <button
+                className="btn btn-back"
+                onClick={() => {
+                  setWord(currentWord);
+                }}
+              >
+                Back to {currentWord}
+              </button>
+            )}
+            <button
+              className="btn btn-close-dictionary"
+              onClick={closeDictionary}
+            >
+              Close
+            </button>
+          </div>
         </Modal>
       </Main>
 

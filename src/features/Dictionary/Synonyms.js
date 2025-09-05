@@ -1,13 +1,11 @@
-import { DICTIONARY_API_URL } from '../../utilities/config';
+import WordLink from './WordLink';
 
 function Synonyms({ synonyms }) {
   return (
     <div className="word__synonyms">
       <strong>Synonyms:</strong>
       {synonyms.map((synonym, index) => (
-        <a href={`${DICTIONARY_API_URL}${synonym}`} key={index}>
-          {synonym}
-        </a>
+        <WordLink word={synonym} key={index} />
       ))}
     </div>
   );

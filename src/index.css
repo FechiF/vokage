@@ -37,7 +37,6 @@ html {
 body {
   min-height: 100vh;
   color: var(--color-grey-200);
-  background-color: var(--color-grey-700);
   overscroll-behavior-y: none;
   background-color: var(--color-grey-800);
   padding: 3.2rem;
@@ -339,16 +338,16 @@ progress {
 }
 
 .chunin {
-  background-color: #391434;
+  background-color: #1f2137;
 }
 .jonin {
-  background-color: #14392d;
+  background-color: #2e301c;
 }
 .hokage {
-  background-color: #391e14;
+  background-color: #27201b;
 }
 .legendary {
-  background-color: #142339;
+  background-color: #1f2226;
 }
 
 .final {
@@ -478,7 +477,10 @@ progress {
 .modal p {
   font-size: 1.6rem;
 }
-
+.modal .btn-grp {
+  width: 100%;
+  justify-content: space-between;
+}
 .btn-close {
   background: none;
   border: none;
@@ -506,6 +508,14 @@ progress {
 .btn-close-dictionary {
   margin: 6rem auto 0;
 }
+.btn-back {
+  margin-top: 6rem;
+  opacity: 0.5;
+}
+.btn-back:hover {
+  opacity: 1;
+}
+
 footer {
   margin-top: 6rem;
 }
