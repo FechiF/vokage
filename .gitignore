@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+public/image-test.html
+public/levels.json
+public/rename_images.py

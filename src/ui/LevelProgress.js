@@ -9,9 +9,9 @@ function LevelProgress() {
     <header className="progress">
       <progress max={NumLevels} value={level} />
 
-      <p>
+      <aside>
         <strong>{level}</strong>/{NumLevels} levels
-      </p>
+      </aside>
     </header>
   );
 }

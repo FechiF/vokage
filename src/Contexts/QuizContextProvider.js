@@ -110,6 +110,16 @@ function reducer(state, action) {
         answer: null,
         points: 0,
       };
+    case 'godMode':
+      return {
+        ...state,
+        index: 0,
+        answer: null,
+        points: 0,
+        highScore: 0,
+        questions: shuffle(state.allQuestions),
+        status: 'godMode',
+      };
 
     default:
       throw new Error('Action unknown');

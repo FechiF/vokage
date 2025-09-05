@@ -5,6 +5,9 @@ import { useQuiz } from '../contexts/QuizContextProvider';
 function StartLevelScreen() {
   const { dispatch, status, level, levels } = useQuiz();
   const { rank, name, description } = levels[level - 1];
+  const imgName = `${rank.toLowerCase().replaceAll(' ', '-')}-${name
+    .toLowerCase()
+    .replaceAll(' ', '-')}`;
 
   useEffect(
     function () {
@@ -32,7 +35,7 @@ function StartLevelScreen() {
         Level {level}: {rank} {name}
       </h3>
       <figure>
-        <img src={`/images/${level}.jpg`} alt={name} />
+        <img src={`/images/${imgName}.jpg`} alt={name} />
       </figure>
 
       {(status === 'startingLevel-up' || Number(level) === levels.length) && (

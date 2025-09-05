@@ -1,16 +1,23 @@
 :root {
-  --color-darkest: #343a40;
-  --color-dark: #495057;
-  --color-medium: #ced4da;
-  --color-light: #f1f3f5;
   --color-theme: #1098ad;
   --color-accent: #ffa94d;
   --color-error: #ff4d4d;
-  --color-dark--1: #2d3439;
-  --color-dark--2: #42484d;
-  --color-light--1: #aaa;
-  --color-light--2: #ececec;
-  --color-light--3: rgb(214, 222, 224);
+  --color-grey-0: #fff;
+  --color-grey-50: #f9fafb;
+  --color-grey-100: #f3f4f6;
+  --color-grey-200: #e5e7eb;
+  --color-grey-300: #d1d5db;
+  --color-grey-400: #9ca3af;
+  --color-grey-500: #6b7280;
+  --color-grey-600: #4b5563;
+  --color-grey-700: #374151;
+  --color-grey-800: #1f2937;
+  --color-grey-900: #111827;
+
+  --border-radius-tiny: 3px;
+  --border-radius-sm: 5px;
+  --border-radius-md: 7px;
+  --border-radius-lg: 9px;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Protest+Revolution&display=swap');
@@ -29,10 +36,10 @@ html {
 
 body {
   min-height: 100vh;
-  color: var(--color-light);
-  background-color: var(--color-darkest);
+  color: var(--color-grey-200);
+  background-color: var(--color-grey-700);
   overscroll-behavior-y: none;
-  background-color: var(--color-dark--1);
+  background-color: var(--color-grey-800);
   padding: 3.2rem;
   width: 100%;
 }
@@ -96,12 +103,18 @@ h4 {
   margin-bottom: 2.4rem;
 }
 
-.start p {
+p {
   font-size: 1.7rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+aside {
+  font-size: 1.4rem;
+}
+
+.start p {
   margin-bottom: 4rem;
   max-width: 600px;
-
-  line-height: 1.6;
 }
 
 .start {
@@ -117,7 +130,7 @@ h4 {
   gap: 1.2rem;
   grid-template-columns: auto auto;
   font-size: 1.8rem;
-  color: var(--color-medium);
+  color: var(--color-grey-300);
 }
 
 progress {
@@ -128,7 +141,7 @@ progress {
 }
 
 ::-webkit-progress-bar {
-  background-color: var(--color-medium);
+  background-color: var(--color-grey-300);
   border-radius: 100px;
 }
 ::-webkit-progress-value {
@@ -141,8 +154,8 @@ progress {
   font-family: inherit;
   color: inherit;
   font-size: 2rem;
-  border: 2px solid var(--color-dark);
-  background-color: var(--color-dark);
+  border: 2px solid var(--color-grey-600);
+  background-color: var(--color-grey-600);
   padding: 1.2rem 2.4rem;
   cursor: pointer;
   border-radius: 100px;
@@ -150,7 +163,7 @@ progress {
 }
 
 .btn:not([disabled]):hover {
-  background-color: var(--color-darkest);
+  background-color: var(--color-grey-700);
 }
 
 .btn-option:not([disabled]):hover {
@@ -165,6 +178,17 @@ progress {
   float: right;
 }
 
+.btn-grp {
+  display: flex;
+  justify-content: space-between;
+}
+.btn-restart {
+  opacity: 0.5;
+}
+
+.btn-restart:hover {
+  opacity: 1;
+}
 .options {
   display: flex;
   flex-direction: column;
@@ -180,12 +204,24 @@ progress {
 .btn-option.correct {
   background-color: var(--color-theme);
   border: 2px solid var(--color-theme);
-  color: var(--color-light);
+  color: var(--color-grey-200);
 }
 .btn-option.wrong {
   background-color: var(--color-accent);
   border: 2px solid var(--color-accent);
-  color: var(--color-darkest);
+  color: var(--color-grey-700);
+}
+
+.btn-link {
+  font-family: inherit;
+  color: inherit;
+  font-size: 1.4rem;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transition: 0.3s;
+  text-decoration: underline;
+  outline: none;
 }
 .answer {
   transform: translateX(2rem);
@@ -193,13 +229,13 @@ progress {
 .btn-option.wrong.answer {
   background-color: var(--color-error);
   border: 2px solid var(--color-error);
-  color: var(--color-light);
+  color: var(--color-grey-200);
   opacity: 0.5;
 }
 
 .result {
   background-color: var(--color-theme);
-  color: var(--color-light);
+  color: var(--color-grey-200);
   border-radius: 100px;
   text-align: center;
   padding: 2rem;
@@ -219,14 +255,8 @@ progress {
 }
 
 .level p {
-  font-size: 1.7rem;
-  line-height: 1.6;
   margin: 2rem 0 0;
   text-align: left;
-}
-
-.progress p {
-  margin: 0;
 }
 
 .level figure {
@@ -254,21 +284,21 @@ progress {
   margin-top: 4rem;
   gap: 1.6rem;
 
-  color: var(--color-medium);
+  color: var(--color-grey-300);
   font-size: 1.4rem;
 }
 
 .timer {
   float: left;
   font-size: 1.8rem;
-  color: var(--color-medium);
-  border: 2px solid var(--color-dark);
+  color: var(--color-grey-300);
+  border: 2px solid var(--color-grey-600);
   padding: 1.35rem 2.8rem;
   border-radius: 100px;
 }
 
 .form {
-  background-color: var(--color-dark--2);
+  background-color: var(--color-grey-600--2);
   border-radius: 5px;
   padding: 1.3rem 2rem;
   margin-bottom: 1.4rem;
@@ -299,7 +329,7 @@ progress {
   font-size: 1.7rem;
   border: none;
   border-radius: 3px;
-  background-color: var(--color-light--3);
+  background-color: var(--color-grey-300);
   transition: all 0.2s;
 }
 
@@ -309,16 +339,16 @@ progress {
 }
 
 .chunin {
-  background-color: #180d27;
+  background-color: #391434;
 }
 .jonin {
-  background-color: #0d2924;
+  background-color: #14392d;
 }
 .hokage {
-  background-color: #271d12;
+  background-color: #391e14;
 }
 .legendary {
-  background-color: #121c27;
+  background-color: #142339;
 }
 
 .final {
@@ -376,6 +406,78 @@ progress {
 .counter * {
   font-size: inherit;
   padding: 0.8rem;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--color-grey-900);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  transition: all 0.5s;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--color-grey-800);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 3.2rem 4rem;
+  transition: all 0.5s;
+}
+
+.modal h3 {
+  margin-bottom: 2rem;
+}
+
+.modal p {
+  font-size: 1.6rem;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  padding: 0.4rem;
+  border-radius: var(--border-radius-sm);
+  transform: translateX(0.8rem);
+  transition: all 0.2s;
+  position: absolute;
+  top: 1.2rem;
+  right: 1.9rem;
+}
+.btn-close:hover {
+  background-color: var(--color-grey-100);
+}
+
+.btn-close svg {
+  width: 2.4rem;
+  height: 2.4rem;
+  /* Sometimes we need both */
+  /* fill: var(--color-grey-500);
+    stroke: var(--color-grey-500); */
+  color: var(--color-grey-500);
+}
+
+footer {
+  margin-top: 6rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.footer-links .btn-link {
+  color: var(--color-theme);
+}
+.footer-links .btn-link:hover {
+  color: var(--color-accent);
 }
 
 @media (min-width: 768px) {

@@ -13,13 +13,13 @@ function Progress() {
   return (
     <header className="progress">
       <progress max={numQuestions} value={index + Number(answer !== null)} />
-      <p>
+      <aside>
         Question <strong>{index + 1}</strong>/{numQuestions}
-      </p>
+      </aside>
 
-      <p>
+      <aside>
         <strong>{points}</strong>/{totalPoints} points
-      </p>
+      </aside>
     </header>
   );
 }
