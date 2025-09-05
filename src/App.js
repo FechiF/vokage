@@ -12,15 +12,32 @@ import { useQuiz } from './contexts/QuizContextProvider.js';
 import ShowLevelScreen from './screens/ShowLevelScreen.js';
 import RestartButton from './ui/RestartButton.js';
 import Modal from './ui/Modal.js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Footer from './ui/Footer.js';
+import DictionaryEntry from './features/Dictionary/DictionaryEntry.js';
 
 function App() {
-  const { questions, status, index } = useQuiz();
+  const { questions, status, index, answer } = useQuiz();
   const [isDictionaryOpen, setIsDictionaryOpen] = useState(false);
+  const [definition, setDefinition] = useState('');
 
-  const openDictionary = () => setIsDictionaryOpen(true);
   const closeDictionary = () => setIsDictionaryOpen(false);
+
+  useEffect(
+    function () {
+      if (answer && answer !== questions[index].answer) {
+        setIsDictionaryOpen(true);
+        fetch(
+          `https://api.dictionaryapi.dev/api/v2/entries/en/${questions[index].word}`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            setDefinition(data[0]);
+          });
+      }
+    },
+    [answer, index, questions]
+  );
 
   return (
     <div className="app">
@@ -47,8 +64,12 @@ function App() {
         )}
         {status === 'finished' && <FinishScreen />}
 
-        <Modal isOpen={isDictionaryOpen} onClose={closeDictionary} title="Word">
-          Definition here
+        <Modal
+          isOpen={isDictionaryOpen}
+          onClose={closeDictionary}
+          title={questions[index]?.word}
+        >
+          <DictionaryEntry entry={definition} />
         </Modal>
       </Main>
 

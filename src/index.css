@@ -408,6 +408,45 @@ progress {
   padding: 0.8rem;
 }
 
+/* dictionary */
+.dictionary__entry a {
+  color: var(--color-theme);
+}
+.word__audio {
+  height: 3rem;
+  margin-bottom: 1rem;
+  position: relative;
+  top: -1rem;
+}
+.word__etc {
+  font-size: 1.4rem;
+}
+
+.word__etc > div {
+  display: flex;
+  gap: 0.5rem;
+  padding-bottom: 1rem;
+}
+.word__etc > div > *,
+.word__sources > * {
+  display: inline-block;
+}
+
+.word__sources {
+  border-top: 1px solid var(--color-grey-600);
+  padding-top: 3rem;
+  font-size: 1.2rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.word__meanings {
+  display: flex;
+  gap: 3rem;
+  flex-direction: column;
+}
+/* modal */
+
 .overlay {
   position: fixed;
   top: 0;
