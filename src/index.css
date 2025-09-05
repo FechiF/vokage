@@ -462,13 +462,12 @@ progress {
 .modal {
   position: fixed;
   width: 100vw;
+  height: 100%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--color-grey-800);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-lg);
-  padding: 3.2rem 4rem;
+  padding: 6rem 4rem;
   transition: all 0.5s;
 }
 
@@ -492,7 +491,7 @@ progress {
   right: 1.9rem;
 }
 .btn-close:hover {
-  background-color: var(--color-grey-100);
+  background-color: var(--color-grey-300);
 }
 
 .btn-close svg {
@@ -504,6 +503,9 @@ progress {
   color: var(--color-grey-500);
 }
 
+.btn-close-dictionary {
+  margin: 6rem auto 0;
+}
 footer {
   margin-top: 6rem;
 }
@@ -535,6 +537,10 @@ footer {
   }
 
   .modal {
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
     width: auto;
+    height: auto;
+    padding: 3.2rem 4rem;
   }
 }

@@ -25,9 +25,12 @@ import { DICTIONARY_API_URL } from './utilities/config.js';
 function App() {
   const { questions, status, index, answer } = useQuiz();
   const [isDictionaryOpen, setIsDictionaryOpen] = useState(false);
-  const [definition, setDefinition] = useState('');
+  const [definition, setDefinition] = useState(null);
 
-  const closeDictionary = () => setIsDictionaryOpen(false);
+  function closeDictionary() {
+    setIsDictionaryOpen(false);
+    setDefinition(null);
+  }
 
   useEffect(
     function () {
@@ -74,6 +77,13 @@ function App() {
           title={questions[index]?.word}
         >
           <DictionaryEntry entry={definition} />
+
+          <button
+            className="btn btn-close-dictionary"
+            onClick={closeDictionary}
+          >
+            Close
+          </button>
         </Modal>
       </Main>
 
