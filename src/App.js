@@ -1,20 +1,26 @@
-import Header from './ui/Header.js';
+import { useEffect, useState } from 'react';
+
+import { useQuiz } from './contexts/QuizContextProvider.js';
+
 import Main from './Main.js';
+import StartScreen from './screens/StartScreen.js';
+import ShowLevelScreen from './screens/ShowLevelScreen.js';
+import FinishScreen from './screens/FinishScreen.js';
+
+import Question from './features/Question';
+import DictionaryEntry from './features/Dictionary/DictionaryEntry.js';
+
+import Header from './ui/Header.js';
 import Loader from './ui/Loader';
 import Error from './ui/Error';
-import StartScreen from './screens/StartScreen.js';
-import Question from './features/Question';
-import NextButton from './ui/NextButton';
 import Progress from './ui/Progress';
-import FinishScreen from './screens/FinishScreen.js';
+import NextButton from './ui/NextButton';
 import FinishButton from './ui/FinishButton';
-import { useQuiz } from './contexts/QuizContextProvider.js';
-import ShowLevelScreen from './screens/ShowLevelScreen.js';
 import RestartButton from './ui/RestartButton.js';
 import Modal from './ui/Modal.js';
-import { useEffect, useState } from 'react';
 import Footer from './ui/Footer.js';
-import DictionaryEntry from './features/Dictionary/DictionaryEntry.js';
+
+import { DICTIONARY_API_URL } from './utilities/config.js';
 
 function App() {
   const { questions, status, index, answer } = useQuiz();
@@ -27,9 +33,7 @@ function App() {
     function () {
       if (answer && answer !== questions[index].answer) {
         setIsDictionaryOpen(true);
-        fetch(
-          `https://api.dictionaryapi.dev/api/v2/entries/en/${questions[index].word}`
-        )
+        fetch(`${DICTIONARY_API_URL}${questions[index].word}`)
           .then((res) => res.json())
           .then((data) => {
             setDefinition(data[0]);
