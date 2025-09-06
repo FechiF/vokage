@@ -6,7 +6,7 @@ function Meaning({ meaning }) {
   return (
     <div className="word__meaning">
       <p className="word__definition">
-        <strong className="word__partOfSpeech">{partOfSpeech}</strong>&nbsp;
+        <span className="word__partOfSpeech">{partOfSpeech}</span>&nbsp;
         {definitions[0].definition}
       </p>
       <div className="word__etc">

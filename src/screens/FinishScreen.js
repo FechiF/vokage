@@ -1,4 +1,5 @@
 import { useQuiz } from '../contexts/QuizContextProvider.js';
+import { NUMBER_OF_QUESTIONS_PER_LEVEL } from '../utilities/config.js';
 function FinishScreen() {
   const { points, questions, highScore, dispatch } = useQuiz();
   const maxPossiblePoints = questions.reduce(
@@ -9,19 +10,26 @@ function FinishScreen() {
   const percentage = Math.round((points / maxPossiblePoints) * 100, 0);
 
   return (
-    <>
-      <p className="result">
-        {points > 8 && `You're almost there!`}You scored{' '}
+    <div className="finish-screen">
+      <h2>You scored</h2>{' '}
+      <h3
+        className={`result ${
+          points < 0.5 * NUMBER_OF_QUESTIONS_PER_LEVEL ? 'poor' : ''
+        } ${points > 0.7 * NUMBER_OF_QUESTIONS_PER_LEVEL ? 'great' : ''}`}
+      >
         <strong>{points}</strong> out of {maxPossiblePoints} ({percentage}%)
-      </p>
+      </h3>
+      {points > 0.7 * NUMBER_OF_QUESTIONS_PER_LEVEL && (
+        <p>You're almost there!</p>
+      )}
       <p className="highscore">( Highscore: {highScore} points )</p>
       <button
-        className="btn btn-ui"
+        className="btn btn-close-modal"
         onClick={() => dispatch({ type: 'restart' })}
       >
         Try again
       </button>
-    </>
+    </div>
   );
 }
 

@@ -19,14 +19,14 @@ function DictionaryEntry({ entry }) {
   return (
     <div className="dictionary__entry">
       <h3>{word}</h3>
-      <p className="word__phonetic">{phonetic}</p>
-
-      {phonetics[0]?.audio && (
-        <audio className="word__audio" controls>
-          <source src={phonetics[0]?.audio} />
-        </audio>
-      )}
-
+      <div className="phonetics">
+        <p className="word__phonetic">{phonetic}</p>
+        {phonetics[0]?.audio && (
+          <audio className="word__audio" controls>
+            <source src={phonetics[0]?.audio} />
+          </audio>
+        )}
+      </div>
       <Meanings meanings={meanings} />
 
       {sources?.length && <Sources sources={sources} />}

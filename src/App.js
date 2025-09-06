@@ -75,24 +75,23 @@ function App() {
           ) : (
             <DictionaryEntry entry={entry} />
           )}
-          <div className="btn-grp">
-            {entry?.word !== currentWord && (
-              <button
-                className="btn btn-back"
-                onClick={() => {
-                  setWord(currentWord);
-                }}
-              >
-                Back to {currentWord}
+          {entry && (
+            <div className="btn-grp">
+              {entry?.word !== currentWord && (
+                <button
+                  className="btn btn-back"
+                  onClick={() => {
+                    setWord(currentWord);
+                  }}
+                >
+                  Back to {currentWord}
+                </button>
+              )}
+              <button className="btn btn-close-modal" onClick={closeDictionary}>
+                Close
               </button>
-            )}
-            <button
-              className="btn btn-close-dictionary"
-              onClick={closeDictionary}
-            >
-              Close
-            </button>
-          </div>
+            </div>
+          )}
         </Modal>
       </Main>
 

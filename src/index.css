@@ -231,16 +231,25 @@ progress {
   color: var(--color-grey-200);
   opacity: 0.5;
 }
-
-.result {
-  background-color: var(--color-theme);
-  color: var(--color-grey-200);
-  border-radius: 100px;
+.finish-screen {
   text-align: center;
+}
+.result {
+  background-color: var(--color-accent);
+  color: var(--color-grey-800);
+  border-radius: 100px;
   padding: 2rem;
   font-size: 2rem;
   font-weight: 500;
   margin-bottom: 1.6rem;
+}
+.result.poor {
+  background-color: var(--color-error);
+  color: var(--color-grey-200);
+}
+.result.great {
+  background-color: var(--color-theme);
+  color: var(--color-grey-900);
 }
 
 .result span {
@@ -411,23 +420,44 @@ progress {
 .dictionary__entry a {
   color: var(--color-theme);
 }
-.word__audio {
-  height: 3rem;
-  margin-bottom: 1rem;
-  position: relative;
-  top: -1rem;
-}
-.word__etc {
-  font-size: 1.4rem;
+.dictionary__entry p {
+  margin-bottom: 0;
 }
 
-.word__etc > div {
+.phonetics {
   display: flex;
   gap: 0.5rem;
-  padding-bottom: 1rem;
+  flex-direction: column;
 }
-.word__etc > div > *,
-.word__sources > * {
+.word__audio {
+  height: 3rem;
+}
+.word__meanings {
+  display: flex;
+  gap: 1.2rem;
+  flex-direction: column;
+  padding: 2.6rem 0 4rem;
+}
+
+.word__partOfSpeech {
+  font-style: italic;
+  font-weight: 600;
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+.word__etc {
+  font-size: 1.2rem;
+  padding-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.word__etc > div {
+  display: flex;
+  gap: 0.2rem 0.6rem;
+  flex-wrap: wrap;
+}
+.word__etc > div > * {
   display: inline-block;
 }
 
@@ -438,12 +468,10 @@ progress {
   display: flex;
   gap: 0.5rem;
 }
-
-.word__meanings {
-  display: flex;
-  gap: 3rem;
-  flex-direction: column;
+.word__sources a {
+  display: block;
 }
+
 /* modal */
 
 .overlay {
@@ -505,7 +533,7 @@ progress {
   color: var(--color-grey-500);
 }
 
-.btn-close-dictionary {
+.btn-close-modal {
   margin: 6rem auto 0;
 }
 .btn-back {

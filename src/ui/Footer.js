@@ -32,6 +32,9 @@ function Footer() {
         title="About Vocabulary Hokage"
       >
         <About />
+        <button className="btn btn-close-modal" onClick={closeAbout}>
+          Close
+        </button>
       </Modal>
       <Modal
         isOpen={isInstructionsOpen}
@@ -39,6 +42,9 @@ function Footer() {
         title="Instructions"
       >
         <Instructions />
+        <button className="btn btn-close-modal" onClick={closeInstructions}>
+          Close
+        </button>
       </Modal>
     </footer>
   );
