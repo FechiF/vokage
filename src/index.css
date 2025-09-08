@@ -494,6 +494,7 @@ progress {
   position: fixed;
   width: 100vw;
   min-height: 100%;
+  max-width: 650px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -582,7 +583,7 @@ footer {
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-lg);
     width: auto;
-    height: auto;
+    min-height: 80%;
     padding: 3.2rem 4rem;
   }
 }
