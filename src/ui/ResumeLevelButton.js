@@ -10,7 +10,7 @@ function ResumeLevelButton({ btnClass }) {
         dispatch({ type: 'resume-level' });
       }}
     >
-      Resume level
+      Resume <span className="xs-hide">level</span>
     </button>
   );
 }

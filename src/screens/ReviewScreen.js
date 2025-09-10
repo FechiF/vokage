@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useQuiz } from '../contexts/QuizContextProvider';
 import ReviewCard from '../ui/ReviewCard';
 import { HiMagnifyingGlass, HiXMark } from 'react-icons/hi2';
-import { getQuestionsPerLevel, findSearchTerms } from '../utilities/utilities';
+import { getQuestionsPerLevel, hasSearchTerm } from '../utilities/utilities';
 import Modal from '../ui/Modal';
 import { useDictionary } from '../contexts/DictionaryContextProvider';
 import Loader from '../ui/Loader';
@@ -33,15 +33,15 @@ function ReviewScreen() {
     searchText.length > 0
       ? unlockedLevels.filter((level) => {
           const questions = getQuestionsPerLevel(level.level, allQuestions);
-          const qwords = questions.filter(
-            (q) => findSearchTerms(q.word, searchText).length
+          const qwords = questions.filter((q) =>
+            hasSearchTerm(q.word, searchText)
           );
 
           return (
             nums?.includes(level.level) ||
             qwords?.length ||
-            findSearchTerms(level.rank, searchText).length ||
-            findSearchTerms(level.name, searchText).length
+            hasSearchTerm(level.rank, searchText) ||
+            hasSearchTerm(level.name, searchText)
           );
         })
       : unlockedLevels;

@@ -9,7 +9,7 @@ function ReviewLevelsButton({ btnClass }) {
         dispatch({ type: 'review' });
       }}
     >
-      Review levels
+      Review <span className="xs-hide">levels</span>
     </button>
   );
 }

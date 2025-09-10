@@ -33,24 +33,13 @@ export function getQuestionsPerLevel(level, allQuestions) {
   });
 }
 
-export function findSearchTerms(text, searchTerm) {
-  if (!searchTerm || searchTerm.length < 3 || searchTerm === '') return [];
-  const foundStrings = searchTerm
+export function hasSearchTerm(text, searchTerm) {
+  if (!searchTerm || searchTerm.length === 0 || searchTerm === '') return false;
+  const hasSearchTerm = searchTerm
     .toLowerCase()
     .replace(/[^a-z ]/g, '')
     .split(' ')
-    .filter((s) => s !== '' && text.toLowerCase().includes(s));
+    .some((s) => s !== '' && text.toLowerCase().includes(s));
 
-  return foundStrings;
-}
-
-export function hasSearchTerms(text, searchTerm) {
-  if (!searchTerm || searchTerm.length < 3 || searchTerm === '') return [];
-  const foundStrings = searchTerm
-    .toLowerCase()
-    .replace(/[^a-z ]/g, '')
-    .split(' ')
-    .filter((s) => s !== '' && text.toLowerCase().includes(s));
-
-  return foundStrings;
+  return hasSearchTerm;
 }

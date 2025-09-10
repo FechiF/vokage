@@ -111,6 +111,10 @@ aside {
   font-size: 1.4rem;
 }
 
+.xs-hide {
+  display: none;
+}
+
 main {
   max-width: 650px;
 }
@@ -246,21 +250,18 @@ progress {
   text-align: center;
 }
 .result {
-  background-color: var(--color-accent);
-  color: var(--color-grey-800);
+  color: var(--color-accent);
   border-radius: 100px;
-  padding: 2rem;
-  font-size: 2rem;
+  padding: 0 1rem 1rem;
+  font-size: 4rem;
   font-weight: 500;
   margin-bottom: 1.6rem;
 }
 .result.poor {
-  background-color: var(--color-error);
-  color: var(--color-grey-200);
+  color: var(--color-error);
 }
 .result.great {
-  background-color: var(--color-theme);
-  color: var(--color-grey-900);
+  color: var(--color-theme);
 }
 
 .result span {
@@ -672,6 +673,12 @@ footer {
 .word-list .word-link {
   color: var(--color-grey-200);
   text-decoration: none;
+}
+
+@media (min-width: 500px) {
+  .xs-hide {
+    display: inline;
+  }
 }
 
 @media (min-width: 768px) {

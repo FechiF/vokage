@@ -1,8 +1,8 @@
 import { useDictionary } from '../contexts/DictionaryContextProvider';
 import { useQuiz } from '../contexts/QuizContextProvider';
 import { DICTIONARY_API_URL } from '../utilities/config';
-import { findSearchTerms, getQuestionsPerLevel } from '../utilities/utilities';
-import BoldSearchText from './BoldSearchText';
+import { getQuestionsPerLevel } from '../utilities/utilities';
+import BoldText from './BoldText';
 
 function ReviewCard({ level: cardLevel, setIsDictionaryOpen, searchText }) {
   const { allQuestions, dispatch } = useQuiz();
@@ -23,19 +23,13 @@ function ReviewCard({ level: cardLevel, setIsDictionaryOpen, searchText }) {
             <h3>Level {`${level}`}</h3>
             <h4>
               {searchText.length ? (
-                <BoldSearchText
-                  text={rank}
-                  searchTerms={findSearchTerms(rank, searchText)}
-                />
+                <BoldText text={rank} boldText={searchText} />
               ) : (
                 rank
               )}
               &nbsp;
               {searchText.length ? (
-                <BoldSearchText
-                  text={name}
-                  searchTerms={findSearchTerms(name, searchText)}
-                />
+                <BoldText text={name} boldText={searchText} />
               ) : (
                 name
               )}
@@ -63,10 +57,7 @@ function ReviewCard({ level: cardLevel, setIsDictionaryOpen, searchText }) {
             className="word-link"
           >
             {searchText.length ? (
-              <BoldSearchText
-                text={q.word}
-                searchTerms={findSearchTerms(q.word, searchText)}
-              />
+              <BoldText text={q.word} boldText={searchText} />
             ) : (
               q.word
             )}
