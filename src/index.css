@@ -216,6 +216,9 @@ progress {
   width: 100%;
   text-align: left;
 }
+.btn-option:disabled {
+  opacity: 1;
+}
 
 .btn-option.correct {
   background-color: var(--color-theme);
