@@ -3,7 +3,8 @@ import { useQuiz } from '../contexts/QuizContextProvider';
 import { NUMBER_OF_QUESTIONS_PER_LEVEL } from '../utilities/config';
 
 function FinishButton() {
-  const { dispatch, points, level } = useQuiz();
+  const { dispatch, points, level, storedLevel } = useQuiz();
+  const isReview = level < storedLevel;
 
   useEffect(
     function () {
@@ -20,7 +21,9 @@ function FinishButton() {
       onClick={() =>
         dispatch({
           type:
-            points === NUMBER_OF_QUESTIONS_PER_LEVEL ? 'nextLevel' : 'finish',
+            !isReview && points === NUMBER_OF_QUESTIONS_PER_LEVEL
+              ? 'nextLevel'
+              : 'finish',
         })
       }
     >

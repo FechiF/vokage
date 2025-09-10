@@ -1,3 +1,5 @@
+import { NUMBER_OF_QUESTIONS_PER_LEVEL } from './config';
+
 export function shuffle(array) {
   return array.reduce(
     (acc, _, i) => {
@@ -20,4 +22,13 @@ export function getStoredItem(key, defaultValue = null) {
 
 export function setStoredItem(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
+}
+
+export function getQuestionsPerLevel(level, allQuestions) {
+  const startIndex = level * NUMBER_OF_QUESTIONS_PER_LEVEL;
+  const endIndex = startIndex + NUMBER_OF_QUESTIONS_PER_LEVEL;
+
+  return allQuestions.filter((item, index) => {
+    return index >= startIndex && index < endIndex;
+  });
 }

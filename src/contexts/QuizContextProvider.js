@@ -13,6 +13,7 @@ const initialState = {
   highScore: 0,
   levels: [],
   level: 0,
+  storedLevel: 0,
 };
 
 function getCurrentQuestions(level, allQuestions) {
@@ -39,6 +40,7 @@ function reducer(state, action) {
         allQuestions: action.payload.questions,
         levels: action.payload.levels,
         level: storedLevel,
+        storedLevel: storedLevel,
         status: 'ready',
       };
 
@@ -53,7 +55,7 @@ function reducer(state, action) {
         ...state,
         questions: getCurrentQuestions(action.payload, state.allQuestions),
         index: 0,
-        level: action.payload,
+        level: Number(action.payload),
         status: 'active',
       };
 
@@ -85,6 +87,7 @@ function reducer(state, action) {
         points: 0,
         questions: getCurrentQuestions(state.level + 1, state.allQuestions),
         highScore: 0,
+        storedLevel: state.level + 1,
         status: 'startingLevel-up',
       };
 
@@ -110,6 +113,37 @@ function reducer(state, action) {
         answer: null,
         points: 0,
       };
+
+    case 'review':
+      return {
+        ...state,
+        index: 0,
+        answer: null,
+        points: 0,
+        highScore: 0,
+        status: 'review',
+      };
+    case 'start-review':
+      return {
+        ...state,
+        answer: null,
+        index: 0,
+        level: Number(action.payload),
+        points: 0,
+        questions: getCurrentQuestions(action.payload, state.allQuestions),
+        highScore: 0,
+        status: 'startingLevel-same',
+      };
+    case 'resume-level':
+      return {
+        ...state,
+        index: 0,
+        answer: null,
+        points: 0,
+        highScore: 0,
+        level: state.storedLevel,
+        status: 'ready',
+      };
     case 'godMode':
       return {
         ...state,
@@ -128,7 +162,18 @@ function reducer(state, action) {
 
 function QuizProvider({ children }) {
   const [
-    { questions, status, index, answer, points, highScore, level, levels },
+    {
+      allQuestions,
+      questions,
+      status,
+      index,
+      answer,
+      points,
+      highScore,
+      level,
+      levels,
+      storedLevel,
+    },
     dispatch,
   ] = useReducer(reducer, initialState);
 
@@ -165,6 +210,7 @@ function QuizProvider({ children }) {
   return (
     <QuizContext.Provider
       value={{
+        allQuestions,
         questions,
         status,
         index,
@@ -173,6 +219,7 @@ function QuizProvider({ children }) {
         highScore,
         level,
         levels,
+        storedLevel,
         dispatch,
       }}
     >

@@ -12,7 +12,11 @@ function WordLink({ word }) {
   }
 
   return (
-    <a href={`${DICTIONARY_API_URL}${word}`} onClick={handleClick}>
+    <a
+      href={`${DICTIONARY_API_URL}${word}`}
+      onClick={handleClick}
+      className="word-link"
+    >
       {word}
     </a>
   );

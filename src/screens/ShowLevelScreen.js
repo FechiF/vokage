@@ -3,7 +3,8 @@ import LevelProgress from '../ui/LevelProgress';
 import { useQuiz } from '../contexts/QuizContextProvider';
 
 function StartLevelScreen() {
-  const { dispatch, status, level, levels } = useQuiz();
+  const { dispatch, level, levels } = useQuiz();
+
   const { rank, name, description } = levels[level - 1];
   const imgName = `${rank.toLowerCase().replaceAll(' ', '-')}-${name
     .toLowerCase()
@@ -38,22 +39,32 @@ function StartLevelScreen() {
         <img src={`/images/${imgName}.jpg`} alt={name} />
       </figure>
 
-      {(status === 'startingLevel-up' || Number(level) === levels.length) && (
-        <p>{description}</p>
-      )}
-      {level < levels.length && (
+      <p>{description}</p>
+      <div className="btn-grp">
         <button
-          className="btn btn-ui"
+          className="btn btn-secondary"
           onClick={() =>
             dispatch({
-              type: 'start',
-              payload: level,
+              type: 'review',
             })
           }
         >
-          Start Level {level}
+          Review levels
         </button>
-      )}
+        {level < levels.length && (
+          <button
+            className="btn btn-ui"
+            onClick={() =>
+              dispatch({
+                type: 'start',
+                payload: level,
+              })
+            }
+          >
+            Start Level {level}
+          </button>
+        )}
+      </div>
     </div>
   );
 }

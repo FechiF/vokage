@@ -21,6 +21,7 @@ import Modal from './ui/Modal.js';
 import Footer from './ui/Footer.js';
 
 import { useDictionary } from './contexts/DictionaryContextProvider.js';
+import ReviewScreen from './screens/ReviewScreen.js';
 
 function App() {
   const [isDictionaryOpen, setIsDictionaryOpen] = useState(false);
@@ -47,7 +48,7 @@ function App() {
   return (
     <div className="app">
       <Header />
-
+      {status === 'review' && <ReviewScreen />}
       <Main>
         {status === 'loading' && <Loader />}
         {status === 'error' && <Error />}
@@ -64,6 +65,7 @@ function App() {
                 <NextButton />
               </div>
             )}
+
             {index === questions.length - 1 && <FinishButton />}
           </>
         )}

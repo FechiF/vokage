@@ -4,7 +4,7 @@ function RestartButton() {
   const { dispatch } = useQuiz();
   return (
     <button
-      className="btn btn-ui btn-restart"
+      className="btn btn-ui btn-secondary"
       onClick={() => dispatch({ type: 'restart' })}
     >
       Restart

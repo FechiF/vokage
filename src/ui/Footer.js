@@ -3,6 +3,8 @@ import Modal from './Modal';
 
 import Instructions from './Instructions.js';
 import About from './About.js';
+import ResumeLevelButton from './ResumeLevelButton.js';
+import ReviewLevelsButton from './ReviewLevelsButton.js';
 
 function Footer() {
   const [isAboutOpen, setIsAboutOpen] = useState(false);
@@ -24,6 +26,8 @@ function Footer() {
         <button className="btn-link" onClick={openInstructions}>
           Instructions
         </button>
+        <ReviewLevelsButton btnClass="btn-link" />
+        <ResumeLevelButton btnClass="btn-link" />
       </div>
 
       <Modal
