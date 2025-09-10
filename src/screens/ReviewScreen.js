@@ -3,10 +3,6 @@ import { useQuiz } from '../contexts/QuizContextProvider';
 import ReviewCard from '../ui/ReviewCard';
 import { HiMagnifyingGlass, HiXMark } from 'react-icons/hi2';
 import { getQuestionsPerLevel, hasSearchTerm } from '../utilities/utilities';
-import Modal from '../ui/Modal';
-import { useDictionary } from '../contexts/DictionaryContextProvider';
-import Loader from '../ui/Loader';
-import DictionaryEntry from '../features/Dictionary/DictionaryEntry';
 
 function getNumbers(text) {
   const numbers = text.match(/\d+/g);
@@ -14,17 +10,10 @@ function getNumbers(text) {
 }
 
 function ReviewScreen() {
-  const [isDictionaryOpen, setIsDictionaryOpen] = useState(false);
   const { levels, allQuestions, storedLevel } = useQuiz();
   const unlockedLevels = levels.filter((l) => l.level < storedLevel);
-  const { entry, setWord } = useDictionary();
 
   const [searchText, setSearchText] = useState('');
-
-  function closeDictionary() {
-    setWord(null);
-    setIsDictionaryOpen(false);
-  }
 
   //get searched levels
   const nums = getNumbers(searchText);
@@ -74,26 +63,10 @@ function ReviewScreen() {
           <ReviewCard
             level={filteredLevel}
             key={filteredLevel.level}
-            setIsDictionaryOpen={setIsDictionaryOpen}
             searchText={searchText}
           />
         ))}
       </div>
-
-      <Modal isOpen={isDictionaryOpen} onClose={closeDictionary}>
-        {!entry ? (
-          <Loader text="Loading dictionary..." />
-        ) : (
-          <DictionaryEntry entry={entry} />
-        )}
-        {entry && (
-          <div className="btn-grp">
-            <button className="btn btn-close-modal" onClick={closeDictionary}>
-              Close
-            </button>
-          </div>
-        )}
-      </Modal>
     </div>
   );
 }

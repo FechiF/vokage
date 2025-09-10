@@ -169,6 +169,10 @@ progress {
   transition: 0.3s;
 }
 
+.btn:disabled {
+  opacity: 0.5;
+}
+
 .btn:not([disabled]):hover {
   background-color: var(--color-grey-700);
 }
@@ -187,18 +191,16 @@ progress {
 
 .btn-grp {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
   gap: 3rem;
-}
-.btn-secondary {
-  opacity: 0.5;
 }
 
 .btn-primary {
   background-color: var(--color-theme);
   border: 2px solid var(--color-theme);
   color: var(--color-grey-900);
+  font-weight: 500;
 }
 .btn-secondary:hover {
   opacity: 1;

@@ -9,7 +9,7 @@ function ReviewCard({ level: cardLevel, setIsDictionaryOpen, searchText }) {
   const { image, rank, name, level } = cardLevel;
 
   const levelQuestions = getQuestionsPerLevel(level, allQuestions);
-  const { setWord } = useDictionary();
+  const { openDictionary } = useDictionary();
 
   return (
     <div className="review-card">
@@ -51,8 +51,7 @@ function ReviewCard({ level: cardLevel, setIsDictionaryOpen, searchText }) {
             title={q.word}
             onClick={(e) => {
               e.preventDefault();
-              setIsDictionaryOpen(true);
-              setWord(q.word);
+              openDictionary(q.word);
             }}
             className="word-link"
           >

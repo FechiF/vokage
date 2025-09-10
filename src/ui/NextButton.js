@@ -5,7 +5,7 @@ function NextButton() {
   return (
     <button
       disabled={!answer}
-      className="btn btn-ui"
+      className="btn btn-primary"
       onClick={() => dispatch({ type: 'nextQuestion' })}
     >
       Next
