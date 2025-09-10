@@ -1,15 +1,17 @@
-import { Fragment } from 'react/jsx-runtime';
-
 function BoldText({ text, boldText }) {
-  const parts = text.split(boldText);
+  const regex = new RegExp(`(${boldText})`, 'gi');
+  const parts = text.split(regex);
 
   return (
     <>
       {parts.map((part, index) => (
-        <Fragment key={index}>
-          {part}
-          {index !== parts.length - 1 && <strong>{boldText}</strong>}
-        </Fragment>
+        <span key={index}>
+          {part.toLowerCase() === boldText.toLowerCase() ? (
+            <strong>{part}</strong>
+          ) : (
+            <span>{part}</span>
+          )}
+        </span>
       ))}
     </>
   );

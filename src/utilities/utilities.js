@@ -32,3 +32,25 @@ export function getQuestionsPerLevel(level, allQuestions) {
     return index >= startIndex && index < endIndex;
   });
 }
+
+export function findSearchTerms(text, searchTerm) {
+  if (!searchTerm || searchTerm.length < 3 || searchTerm === '') return [];
+  const foundStrings = searchTerm
+    .toLowerCase()
+    .replace(/[^a-z ]/g, '')
+    .split(' ')
+    .filter((s) => s !== '' && text.toLowerCase().includes(s));
+
+  return foundStrings;
+}
+
+export function hasSearchTerms(text, searchTerm) {
+  if (!searchTerm || searchTerm.length < 3 || searchTerm === '') return [];
+  const foundStrings = searchTerm
+    .toLowerCase()
+    .replace(/[^a-z ]/g, '')
+    .split(' ')
+    .filter((s) => s !== '' && text.toLowerCase().includes(s));
+
+  return foundStrings;
+}

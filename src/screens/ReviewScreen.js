@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useQuiz } from '../contexts/QuizContextProvider';
 import ReviewCard from '../ui/ReviewCard';
 import { HiMagnifyingGlass, HiXMark } from 'react-icons/hi2';
-import { getQuestionsPerLevel } from '../utilities/utilities';
+import { getQuestionsPerLevel, findSearchTerms } from '../utilities/utilities';
 import Modal from '../ui/Modal';
 import { useDictionary } from '../contexts/DictionaryContextProvider';
 import Loader from '../ui/Loader';
@@ -29,20 +29,22 @@ function ReviewScreen() {
   //get searched levels
   const nums = getNumbers(searchText);
 
-  const reviewLevels = unlockedLevels.filter((level) => {
-    const lc_searchText = searchText.toLowerCase();
-    const questions = getQuestionsPerLevel(level.level, allQuestions);
-    const qwords = questions.filter((q) =>
-      q.word.toLowerCase().includes(lc_searchText)
-    );
+  const reviewLevels =
+    searchText.length > 0
+      ? unlockedLevels.filter((level) => {
+          const questions = getQuestionsPerLevel(level.level, allQuestions);
+          const qwords = questions.filter(
+            (q) => findSearchTerms(q.word, searchText).length
+          );
 
-    return (
-      qwords?.length ||
-      level.rank.toLowerCase().includes(lc_searchText) ||
-      level.name.toLowerCase().includes(lc_searchText) ||
-      nums?.includes(level.level)
-    );
-  });
+          return (
+            nums?.includes(level.level) ||
+            qwords?.length ||
+            findSearchTerms(level.rank, searchText).length ||
+            findSearchTerms(level.name, searchText).length
+          );
+        })
+      : unlockedLevels;
 
   return (
     <div className="reviews">
@@ -73,6 +75,7 @@ function ReviewScreen() {
             level={filteredLevel}
             key={filteredLevel.level}
             setIsDictionaryOpen={setIsDictionaryOpen}
+            searchText={searchText}
           />
         ))}
       </div>

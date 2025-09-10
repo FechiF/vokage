@@ -1,9 +1,10 @@
 import { useDictionary } from '../contexts/DictionaryContextProvider';
 import { useQuiz } from '../contexts/QuizContextProvider';
 import { DICTIONARY_API_URL } from '../utilities/config';
-import { getQuestionsPerLevel } from '../utilities/utilities';
+import { findSearchTerms, getQuestionsPerLevel } from '../utilities/utilities';
+import BoldSearchText from './BoldSearchText';
 
-function ReviewCard({ level: cardLevel, setIsDictionaryOpen }) {
+function ReviewCard({ level: cardLevel, setIsDictionaryOpen, searchText }) {
   const { allQuestions, dispatch } = useQuiz();
   const { image, rank, name, level } = cardLevel;
 
@@ -20,7 +21,25 @@ function ReviewCard({ level: cardLevel, setIsDictionaryOpen }) {
 
           <div>
             <h3>Level {`${level}`}</h3>
-            <h4>{`${rank} ${name}`}</h4>
+            <h4>
+              {searchText.length ? (
+                <BoldSearchText
+                  text={rank}
+                  searchTerms={findSearchTerms(rank, searchText)}
+                />
+              ) : (
+                rank
+              )}
+              &nbsp;
+              {searchText.length ? (
+                <BoldSearchText
+                  text={name}
+                  searchTerms={findSearchTerms(name, searchText)}
+                />
+              ) : (
+                name
+              )}
+            </h4>
           </div>
         </div>
         <button
@@ -43,7 +62,14 @@ function ReviewCard({ level: cardLevel, setIsDictionaryOpen }) {
             }}
             className="word-link"
           >
-            {q.word}
+            {searchText.length ? (
+              <BoldSearchText
+                text={q.word}
+                searchTerms={findSearchTerms(q.word, searchText)}
+              />
+            ) : (
+              q.word
+            )}
           </a>
         ))}
       </div>

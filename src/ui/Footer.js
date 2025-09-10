@@ -5,8 +5,10 @@ import Instructions from './Instructions.js';
 import About from './About.js';
 import ResumeLevelButton from './ResumeLevelButton.js';
 import ReviewLevelsButton from './ReviewLevelsButton.js';
+import { useQuiz } from '../contexts/QuizContextProvider.js';
 
 function Footer() {
+  const { storedLevel } = useQuiz();
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isInstructionsOpen, setIsInstructionsOpen] = useState(false);
 
@@ -26,8 +28,8 @@ function Footer() {
         <button className="btn-link" onClick={openInstructions}>
           Instructions
         </button>
-        <ReviewLevelsButton btnClass="btn-link" />
-        <ResumeLevelButton btnClass="btn-link" />
+        {storedLevel > 1 && <ReviewLevelsButton btnClass="btn-link" />}
+        {storedLevel > 0 && <ResumeLevelButton btnClass="btn-link" />}
       </div>
 
       <Modal
