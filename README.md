@@ -2,7 +2,7 @@
 
 ## 🔥 “Master your words, rise to Vocabulary Hokage. Believe it!” 🔥
 
-##### [Play now](https://vokage-api.vercel.app)
+##### [Play now](https://vokage.vercel.app)
 
 ### About Vocabulary Hokage
 
@@ -21,4 +21,4 @@ Genin → Chunin → Jonin → Hokage → Legendary Ninja
 
 Keep training, young shinobi, and see if you can reach Hokage status. Believe it!
 
-##### [Play now](https://vokage-api.vercel.app)
+##### [Play now](https://vokage.vercel.app)
