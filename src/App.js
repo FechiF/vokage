@@ -34,7 +34,7 @@ function App() {
         openDictionary(currentWord);
       }
     },
-    [isInCorrect, currentWord]
+    [isInCorrect, currentWord, openDictionary],
   );
 
   return (
